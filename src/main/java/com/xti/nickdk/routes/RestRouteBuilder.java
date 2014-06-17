@@ -8,10 +8,11 @@ public class RestRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		String port = System.getProperty("PORT");
+		String port = System.getenv("PORT");
 		if(port == null) {
 			port = "9090";
 		}
+		System.out.println("Camel route using port: "+port);
 
 		String hostName = "0.0.0.0";
 		

@@ -8,12 +8,14 @@ public class RestRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		String port = System.getProperty("restPort");
+		String port = System.getProperty("PORT");
 		if(port == null) {
 			port = "9090";
 		}
 
-		from("cxfrs:http://0.0.0.0:"+port+"?resourceClasses=com.xti.nickdk.rest.CountryRestService&bindingStyle=SimpleConsumer")
+		String hostName = "0.0.0.0";
+		
+		from("cxfrs:http://"+hostName+":"+port+"?resourceClasses=com.xti.nickdk.rest.CountryRestService&bindingStyle=SimpleConsumer")
 		.recipientList(simple("direct:${header.operationName}"));
 		
 		from("direct:getCountry")

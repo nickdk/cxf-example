@@ -2,15 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.xti.nickdk</groupId>
-	<artifactId>cxfrs-poc</artifactId>
+	<artifactId>cxf-poc</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
 		<camel.version>2.13.1</camel.version>
 		<spring.version>4.0.5.RELEASE</spring.version>
-		<cxf.version>2.7.11</cxf.version>
-		<jetty.version>8.1.15.v20140411</jetty.version>
+		<cxf.version>3.0.0</cxf.version>
+		<jetty.version>9.2.1.v20140609</jetty.version>
 	</properties>
 
 	<dependencies>
@@ -26,7 +26,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
+			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-runner</artifactId>
 			<version>${jetty.version}</version>
 		</dependency>
@@ -36,33 +36,23 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -81,7 +71,7 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>org.mortbay.jetty</groupId>
+									<groupId>org.eclipse.jetty</groupId>
 									<artifactId>jetty-runner</artifactId>
 									<destFileName>jetty-runner.jar</destFileName>
 								</artifactItem>

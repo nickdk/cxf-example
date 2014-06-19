@@ -12,6 +12,7 @@ import com.xti.nickdk.resources.Country;
 
 @Component
 @Produces("application/json")
+@Path("/country")
 public class CountryRestService {
 
 	@GET

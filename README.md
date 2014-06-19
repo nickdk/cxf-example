@@ -16,4 +16,5 @@ git push heroku master
 Example paths:
 
 GET http://{heroku-instance}.herokuapp.com/country/1
+
 GET http://{heroku-instance}.herokuapp.com/dealer/1

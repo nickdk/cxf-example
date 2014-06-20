@@ -13,7 +13,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 @Component
-@Produces("text/html")
+@Produces("text/plain")
 @Path("/redis")
 public class RedisRestService {
 

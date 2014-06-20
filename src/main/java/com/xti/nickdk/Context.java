@@ -41,7 +41,6 @@ public class Context {
 		LinkedList<ResourceProvider> resourceProviders = new LinkedList<>();
 		for (String beanName : ctx.getBeanDefinitionNames()) {
 			if (ctx.findAnnotationOnBean(beanName, Path.class) != null) {
-				System.out.println(beanName);
 				SpringResourceFactory factory = new SpringResourceFactory(beanName);
 				factory.setApplicationContext(ctx);
 				resourceProviders.add(factory);

@@ -24,7 +24,7 @@ public class RedisRestService {
 	private JedisPool pool;
 
 	@PUT
-	@Path("/{key}/{value}")
+	@Path("/params/{key}/{value}")
 	public String addValue(@PathParam("key") String key,
 			@PathParam("value") String value) {
 
@@ -47,7 +47,7 @@ public class RedisRestService {
 	}
 
 	@GET
-	@Path("/{key}")
+	@Path("/params/{key}")
 	public String getValue(@PathParam("key") String key) {
 		Jedis jedis = pool.getResource();
 		String value = jedis.get(key);

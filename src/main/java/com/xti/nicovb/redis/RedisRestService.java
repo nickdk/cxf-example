@@ -42,7 +42,7 @@ public class RedisRestService {
 		List<Object> syncAndReturnAll = pipeline.syncAndReturnAll();
 
 		pool.returnResource(jedis);
-		return String.format("Total length of the key is now %s.",
+		return String.format("Status %s.",
 				syncAndReturnAll.get(0));
 	}
 

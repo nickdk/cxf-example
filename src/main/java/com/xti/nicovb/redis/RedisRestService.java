@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.Response;
-import redis.clients.jedis.Transaction;
+import redis.clients.jedis.Pipeline;
 
 @Component
 @Produces("text/plain")
@@ -31,21 +30,20 @@ public class RedisRestService {
 
 		Jedis jedis = pool.getResource();
 
+		// Combining transactions and batching (=pipelines)
+		Pipeline pipeline = jedis.pipelined();
 		// Start transaction
-		Transaction transaction = jedis.multi();
-
-		/*
-		 * NX -- Only set the key if it does not already exist. XX -- Only set
-		 * the key if it already exist.
-		 */
-		Response<String> set = transaction.set(key, value, "NX");
-
+		pipeline.multi();
+		// NX -- Only set the key if it does not already exist.
+		// XX -- Only set the key if it already exist.
+		pipeline.set(key, value, "NX");
 		// End transaction
-		List<Object> execGetResponse = transaction.exec();
+		pipeline.exec();
+		List<Object> syncAndReturnAll = pipeline.syncAndReturnAll();
 
 		pool.returnResource(jedis);
-		return String.format("Total length of the key is now %s (%s)",
-				set.get(), execGetResponse.get(0));
+		return String.format("Total length of the key is now %s.",
+				syncAndReturnAll.get(0));
 	}
 
 	@GET

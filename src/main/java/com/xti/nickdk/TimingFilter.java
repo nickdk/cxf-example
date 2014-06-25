@@ -37,7 +37,7 @@ public class TimingFilter implements Filter {
 
 		HttpServletRequest httpReq = (HttpServletRequest) req;
 
-		LOGGER.info("{} ms for {}", (end - start) / 1000000,
+		LOGGER.info("duration={} path={}", (end - start) / 1000000,
 				httpReq.getRequestURI());
 	}
 

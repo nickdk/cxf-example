@@ -3,13 +3,13 @@
  
   <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>source=b2bservice-application %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+      <Pattern>source=application %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
     </layout>
   </appender>
   
   <appender name="PERFORMANCE" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>source=b2bservice-performance %d{HH:mm:ss.SSS} [%thread] - %msg%n</Pattern>
+      <Pattern>source=performance %d{HH:mm:ss.SSS} [%thread] - %msg%n</Pattern>
     </layout>
   </appender>
    

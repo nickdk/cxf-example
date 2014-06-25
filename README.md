@@ -8,6 +8,8 @@ Small example for CXF REST services deployed on Heroku with Jetty runner
 - Jetty 9
 - Servlet 3.1
 - Jackson
+- SLF4J 1.7.7
+- Logback 1.1.2
 
 If you've already set-up heroku tool belt on your machine:
 

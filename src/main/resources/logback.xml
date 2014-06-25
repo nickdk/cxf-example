@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+  <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>source=application time=%d{HH:mm:ss.SSS} thread=[%thread] level=%level logger=%logger{36} - message="%msg"%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="PERFORMANCE" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>source=performance time=%d{HH:mm:ss.SSS} thread=[%thread] - %msg%n</Pattern>
+    </layout>
+  </appender>
+   
+  <logger name="com.xti.nickdk" level="DEBUG"/>
+  <logger name="performance" level="INFO" additivity="false">
+  	<appender-ref ref="PERFORMANCE" />
+  </logger>
+ 
+  <root level="INFO">
+    <appender-ref ref="APP" />
+  </root>
+</configuration>

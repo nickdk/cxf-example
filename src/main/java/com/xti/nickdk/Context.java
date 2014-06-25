@@ -46,11 +46,12 @@ public class Context {
 				resourceProviders.add(factory);
 			}
 		}
-
+		System.out.println("Hello from Heroku (Loggly test)");
 		JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
 		factory.setBus(ctx.getBean(SpringBus.class));
 		factory.setProviders(Arrays.asList(new JacksonJsonProvider()));
 		factory.setResourceProviders(resourceProviders);
+
 		return factory.create();
 	}
 

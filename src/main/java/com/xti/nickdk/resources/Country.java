@@ -1,10 +1,10 @@
 package com.xti.nickdk.resources;
 
 public class Country {
-	
+
 	private String id;
 	private String name;
-	
+
 	public Country(String id) {
 		super();
 		this.id = id;
@@ -13,7 +13,7 @@ public class Country {
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

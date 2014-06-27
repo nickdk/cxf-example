@@ -1,5 +1,7 @@
 package com.xti.nickdk;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -26,9 +28,27 @@ public class PersistenceContext{
 	@Bean
 	public DataSource dataSource() {
 		BoneCPDataSource ds = new BoneCPDataSource();
-	 	ds.setJdbcUrl("jdbc:mysql://localhost:3306/osb");
-		ds.setUsername("osb");
-		ds.setPassword("osb");
+
+		//Host	ec2-54-204-36-244.compute-1.amazonaws.com
+		//Database	d2rb0kef8g0uc0
+		//User	wegwqpmjmpbzdi
+		//Port	5432
+		//Password	Hide PRaIFrDQwXx3l-JBf0aBqKxFgD
+		
+		URI dbUri;
+		try {
+			dbUri = new URI(System.getenv("DATABASE_URL"));
+		} catch (URISyntaxException e) {
+			throw new IllegalStateException(e);
+		}
+
+	    String username = dbUri.getUserInfo().split(":")[0];
+	    String password = dbUri.getUserInfo().split(":")[1];
+	    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+		
+	 	ds.setJdbcUrl(dbUrl);
+		ds.setUsername(username);
+		ds.setPassword(password);
 		return ds;
 	}
  

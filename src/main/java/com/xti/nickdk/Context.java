@@ -28,7 +28,7 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @ComponentScan("com.xti")
 @PropertySource("classpath:application.properties")
-@ImportResource({"classpath:META-INF/cxf/cxf.xml"})
+@ImportResource("classpath:META-INF/cxf/cxf.xml")
 @Import(PersistenceContext.class)
 public class Context {
 

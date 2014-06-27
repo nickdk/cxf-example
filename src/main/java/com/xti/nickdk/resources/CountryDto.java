@@ -1,23 +1,19 @@
 package com.xti.nickdk.resources;
 
-public class Dealer {
+public class CountryDto {
 	
 	private String id;
 	private String name;
 	
-	public Dealer(String id) {
-		super();
-		this.id = id;
-	}
-
 	public String getId() {
 		return id;
 	}
-	
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}

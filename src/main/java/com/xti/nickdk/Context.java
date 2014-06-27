@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -28,6 +29,7 @@ import redis.clients.jedis.JedisPoolConfig;
 @ComponentScan("com.xti")
 @PropertySource("classpath:application.properties")
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
+@Import(PersistenceContext.class)
 public class Context {
 
 	@Autowired

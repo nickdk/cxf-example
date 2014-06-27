@@ -24,19 +24,14 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("com.xti.nickdk.repositories")
+@Lazy
 public class PersistenceContext{
 	
 	@Bean
-	@Lazy
 	public DataSource dataSource() {
 		BoneCPDataSource ds = new BoneCPDataSource();
 
-		//Host	ec2-54-204-36-244.compute-1.amazonaws.com
-		//Database	d2rb0kef8g0uc0
-		//User	wegwqpmjmpbzdi
-		//Port	5432
-		//Password	Hide PRaIFrDQwXx3l-JBf0aBqKxFgD
-		
+		//TODO NDK: might consider to run against mysql or something locally through a variable or something
 		URI dbUri;
 		try {
 			dbUri = new URI(System.getenv("DATABASE_URL"));
@@ -55,7 +50,6 @@ public class PersistenceContext{
 	}
  
    @Bean
-   @Lazy
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(dataSource());
@@ -69,7 +63,6 @@ public class PersistenceContext{
    }
  
    @Bean
-   @Lazy
    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
       JpaTransactionManager transactionManager = new JpaTransactionManager();
       transactionManager.setEntityManagerFactory(emf);
@@ -78,7 +71,6 @@ public class PersistenceContext{
    }
  
    @Bean
-   @Lazy
    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
       return new PersistenceExceptionTranslationPostProcessor();
    }

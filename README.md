@@ -1,7 +1,7 @@
 cxf-example
 ===========
 
-Small example for CXF REST services deployed on Heroku with Jetty runner
+Small example for CXF REST services deployed on Heroku with Jetty runner and the Heroku Postgres addon
 
 - Spring 4
 - CXF 3

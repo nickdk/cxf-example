@@ -3,6 +3,7 @@ package com.xti.nickdk.rest;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -55,6 +56,13 @@ public class CountryRestService {
 		countryRepository.save(country);
 		LOGGER.info("Persisted country, id: " +country.getId());
 		return getCountry(country.getId());
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public void deleteCountry(@PathParam("id") String id) {
+		Country country = countryRepository.findOne(id);
+		countryRepository.delete(country);
 	}
 	
 	private CountryDto toDto(Country country) {

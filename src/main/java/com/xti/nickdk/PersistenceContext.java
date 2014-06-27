@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,6 +27,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 public class PersistenceContext{
 	
 	@Bean
+	@Lazy
 	public DataSource dataSource() {
 		BoneCPDataSource ds = new BoneCPDataSource();
 
@@ -53,6 +55,7 @@ public class PersistenceContext{
 	}
  
    @Bean
+   @Lazy
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(dataSource());
@@ -66,6 +69,7 @@ public class PersistenceContext{
    }
  
    @Bean
+   @Lazy
    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
       JpaTransactionManager transactionManager = new JpaTransactionManager();
       transactionManager.setEntityManagerFactory(emf);
@@ -74,6 +78,7 @@ public class PersistenceContext{
    }
  
    @Bean
+   @Lazy
    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
       return new PersistenceExceptionTranslationPostProcessor();
    }

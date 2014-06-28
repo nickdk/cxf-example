@@ -1,6 +1,9 @@
 package com.xti.nickdk;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,7 +21,12 @@ import org.slf4j.LoggerFactory;
 public class TimingFilter implements Filter {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger("performance");
-
+	private static final Map<String, Class<?>> resources = new HashMap<>();
+	
+	public static void addResource(String path, Class<?> resource) {
+		resources.put(path, resource);
+	}
+	
 	@Override
 	public void destroy() {
 
@@ -36,9 +44,17 @@ public class TimingFilter implements Filter {
 		Long end = System.nanoTime();
 
 		HttpServletRequest httpReq = (HttpServletRequest) req;
+		
+		Class<?> resource = null;
+		for (Entry<String, Class<?>> rs : resources.entrySet()) {
+			if (httpReq.getRequestURI().startsWith(rs.getKey())) {
+				resource = rs.getValue();
+				break;
+			}
+		}
 
-		LOGGER.info("duration={} path=\"{}\"", (end - start) / 1000000,
-				httpReq.getRequestURI());
+		LOGGER.info("duration={} path=\"{}\" resource={}", (end - start) / 1000000,
+				httpReq.getRequestURI(), resource.getSimpleName());
 	}
 
 	@Override

@@ -29,7 +29,6 @@ public class PersistenceContext{
 	public DataSource dataSource() {
 		BoneCPDataSource ds = new BoneCPDataSource();
 
-		//TODO NDK: might consider to run against mysql or something locally through a variable or something
 		URI dbUri;
 		try {
 			dbUri = new URI(System.getenv("DATABASE_URL"));

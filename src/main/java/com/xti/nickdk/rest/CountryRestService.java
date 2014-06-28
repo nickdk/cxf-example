@@ -22,7 +22,7 @@ import com.xti.nickdk.repositories.CountryRepository;
 import com.xti.nickdk.resources.CountryDto;
 
 @Component
-@Path("/countries")
+@Path("api/countries")
 @Produces("application/json")
 @Consumes("application/json")
 public class CountryRestService {

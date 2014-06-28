@@ -52,6 +52,10 @@ public class TimingFilter implements Filter {
 				break;
 			}
 		}
+		
+		if(resource == null) {
+			return;
+		}
 
 		LOGGER.info("duration={} path=\"{}\" resource={}", (end - start) / 1000000,
 				httpReq.getRequestURI(), resource.getSimpleName());

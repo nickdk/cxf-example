@@ -24,21 +24,28 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories("com.xti.nickdk.repositories")
 public class PersistenceContext{
-	
+	private String dialect = "org.hibernate.dialect.HSQLDialect";
 	@Bean
 	public DataSource dataSource() {
 		BoneCPDataSource ds = new BoneCPDataSource();
 
-		URI dbUri;
-		try {
-			dbUri = new URI(System.getenv("DATABASE_URL"));
-		} catch (URISyntaxException e) {
-			throw new IllegalStateException(e);
+	    String username = "sa";
+	    String dbUrl = "jdbc:hsqldb:mem:aname";
+	    String password = "";
+	    
+	    String envDbUrl = System.getenv("DATABASE_URL");
+		if(envDbUrl != null) {
+			URI dbUri;
+			try {
+				dbUri = new URI(envDbUrl);
+				username = dbUri.getUserInfo().split(":")[0];
+				password = dbUri.getUserInfo().split(":")[1];
+				dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+				dialect = "org.hibernate.dialect.PostgreSQLDialect";
+			} catch (URISyntaxException e) {
+				throw new IllegalStateException(e);
+			}
 		}
-
-	    String username = dbUri.getUserInfo().split(":")[0];
-	    String password = dbUri.getUserInfo().split(":")[1];
-	    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 		
 	 	ds.setJdbcUrl(dbUrl);
 		ds.setUsername(username);
@@ -75,7 +82,7 @@ public class PersistenceContext{
    Properties additionalProperties() {
       Properties properties = new Properties();
       properties.setProperty("hibernate.hbm2ddl.auto", "update");
-      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+      properties.setProperty("hibernate.dialect", dialect);
       return properties;
    }
 }

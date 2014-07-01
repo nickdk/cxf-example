@@ -50,8 +50,6 @@ public class PersistenceContext{
 	 	ds.setJdbcUrl(dbUrl);
 		ds.setUsername(username);
 		ds.setPassword(password);
-		ds.setMinConnectionsPerPartition(20);
-		ds.setMaxConnectionsPerPartition(20);
 		return ds;
 	}
  
